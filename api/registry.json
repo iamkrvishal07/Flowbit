@@ -1,0 +1,16 @@
+{
+  "LogisticsCo": [
+    {
+      "name": "Support Tickets",
+      "url": "http://localhost:3001/remoteEntry.js",
+      "route": "/support"
+    }
+  ],
+  "RetailGmbH": [
+    {
+      "name": "Support Tickets",
+      "url": "http://localhost:3001/remoteEntry.js",
+      "route": "/support"
+    }
+  ]
+}
