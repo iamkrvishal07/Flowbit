@@ -171,3 +171,22 @@ All preconfigured and integrated automatically.
 | agent-a@flowbit.com      | 123456   | agent    | tenant-a  |
 | customer-a@flowbit.com   | 123456   | customer | tenant-a  |
 | admin-b@flowbit.com      | 123456   | admin    | tenant-b  |
+
+
+
+---
+
+
+```env
+PORT=5000
+MONGO_URI=mongodb://mongo:27017/flowbit
+JWT_SECRET=supersecretjwt
+
+WEBHOOK_SECRET=super-secret-shared-key
+N8N_WEBHOOK_URL=http://n8n:5678/webhook/flowbit-ticket-start
+
+N8N_SHARED_SECRET=secret123
+```
+
+
+
