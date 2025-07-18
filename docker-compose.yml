@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: flowbit-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  api:
+    build: ./api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/flowbit
+
+  shell:
+    build: ./shell
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  support-tickets-app:
+    build: ./support-tickets-app
+    ports:
+      - "3001:3001"
+    depends_on:
+      - api
+
+  n8n:
+    image: n8nio/n8n
+    container_name: flowbit-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin
+      - GENERIC_TIMEZONE=Asia/Kolkata
+    volumes:
+      - n8n-data:/home/node/.n8n
+
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - "4040:4040"
+    environment:
+      - NGROK_AUTHTOKEN=cr_300b7EWL6NcqkXgk5u5Eo4gXbQH
+      - NGROK_PORT=5678
+
+volumes:
+  mongo-data:
+  n8n-data:
